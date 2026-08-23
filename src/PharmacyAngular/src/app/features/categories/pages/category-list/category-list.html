@@ -1,0 +1,191 @@
+<div class="d-flex justify-content-between mb-3">
+
+    <h2>
+
+        Categories
+
+    </h2>
+
+    <a
+    *ngIf="canManageCategories"
+    routerLink="/categories/create"
+    class="btn btn-success">
+
+    Create Category
+
+    </a>
+
+</div>
+
+<hr>
+
+<div
+    class="alert alert-info"
+    *ngIf="loading">
+
+    Loading categories...
+
+</div>
+
+<div
+    class="alert alert-danger"
+    *ngIf="error">
+
+    Error loading categories.
+
+</div>
+
+<div class="row mb-3">
+
+    <div class="col-md-4">
+
+        <input
+            class="form-control"
+            placeholder="Search category..."
+            [(ngModel)]="search"
+            (keyup.enter)="loadCategories()">
+
+    </div>
+
+    <div class="col-auto">
+
+        <button
+            class="btn btn-primary"
+            (click)="loadCategories()">
+
+            Search
+
+        </button>
+
+    </div>
+
+</div>
+
+<table
+    class="table table-hover"
+    *ngIf="!loading && !error">
+
+    <thead>
+
+        <tr>
+
+            <th
+                (click)="sort('codeCat')"
+                style="cursor:pointer;">
+
+                Code
+
+                <span *ngIf="sortBy === 'codeCat'">
+
+                    {{ descending ? '▼' : '▲' }}
+
+                </span>
+
+            </th>
+
+            <th
+                (click)="sort('nameCat')"
+                style="cursor:pointer;">
+
+                Name
+
+                <span *ngIf="sortBy === 'nameCat'">
+
+                    {{ descending ? '▼' : '▲' }}
+
+                </span>
+
+            </th>
+
+            <th>
+
+                Actions
+
+            </th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        <tr *ngFor="let category of categories">
+
+            <td>
+
+                {{ category.codeCat }}
+
+            </td>
+
+            <td>
+
+                {{ category.nameCat }}
+
+            </td>
+
+            <td>
+
+    <ng-container *ngIf="canManageCategories">
+
+        <button
+            class="btn btn-primary btn-sm me-2"
+            [routerLink]="['/categories/edit', category.codeCat]">
+
+            Edit
+
+        </button>
+
+        <button
+            class="btn btn-danger btn-sm"
+            (click)="openDelete(category)">
+
+            Delete
+
+        </button>
+
+    </ng-container>
+
+</td>
+
+        </tr>
+
+    </tbody>
+
+</table>
+
+<div class="d-flex justify-content-between mt-3">
+
+    <button
+        class="btn btn-outline-primary"
+        [disabled]="page == 1"
+        (click)="previousPage()">
+
+        Previous
+
+    </button>
+
+    <span>
+
+        Page {{ page }}
+
+    </span>
+
+    <button
+        class="btn btn-outline-primary"
+        (click)="nextPage()">
+
+        Next
+
+    </button>
+
+</div>
+
+<app-confirmation-dialog
+
+    title="Delete Category"
+
+    [message]="'Delete category ' + selectedCategory?.nameCat + '?'"
+
+    (confirmed)="deleteCategory()">
+
+</app-confirmation-dialog>

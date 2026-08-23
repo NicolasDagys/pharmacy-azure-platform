@@ -1,0 +1,54 @@
+services:
+  sqlserver:
+    build:
+      context: ./database
+      dockerfile: docker/Dockerfile
+
+    container_name: pharmacy-sql
+
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "${SA_PASSWORD}"
+
+    ports:
+      - "1433:1433"
+
+    volumes:
+      - sql_data:/var/opt/mssql
+
+  api:
+    image: pharmacy-api
+
+    container_name: pharmacy-api
+
+    depends_on:
+      - sqlserver
+
+    ports:
+      - "8080:8080"
+
+    environment:
+      ConnectionStrings__PharmacyConnection: >
+        Server=sqlserver;
+        Database=Pharmacy;
+        User Id=${DB_USER};
+        Password=${DB_PASSWORD};
+        TrustServerCertificate=True;
+
+      Jwt__Key: ${JWT_KEY}
+
+      APPLICATIONINSIGHTS_CONNECTION_STRING: ${APPLICATIONINSIGHTS_CONNECTION_STRING}
+
+  frontend:
+    image: pharmacy-angular
+
+    container_name: pharmacy-angular
+
+    depends_on:
+      - api
+
+    ports:
+      - "4200:80"
+
+volumes:
+  sql_data:

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "value": "westus3"
+    },
+    "resourceGroupName": {
+      "value": "RG-pharmacy-ob-test"
+    },
+    "environment": {
+      "value": "dev"
+    },
+    "sqlAdminUser": {
+      "value": "pharmacyadmin"
+    },
+    "jwtIssuer": {
+      "value": "PharmacyApi"
+    },
+    "jwtAudience": {
+      "value": "PharmacyApiUsers"
+    },
+    "actionGroupEmail": {
+      "value": "tu-email@example.com"
+    },
+    "apiImage": {
+      "value": "pharmacy-api:v1"
+    },
+    "frontendImage": {
+  "value": "pharmacy-web:v1"
+}
+  }
+}

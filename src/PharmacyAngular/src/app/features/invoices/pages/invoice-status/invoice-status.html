@@ -1,0 +1,89 @@
+<h2>
+
+    Change Invoice Status
+
+</h2>
+
+<hr>
+
+<div class="alert alert-info" *ngIf="loading">
+
+    Loading invoice...
+
+</div>
+
+<div *ngIf="!loading && invoice">
+
+    <div class="card">
+
+        <div class="card-body">
+
+            <p>
+
+                <strong>Invoice:</strong>
+
+                {{invoice.numbInv}}
+
+            </p>
+
+            <p>
+
+                <strong>Current Status:</strong>
+
+                {{invoice.status}}
+
+            </p>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+
+                    New Status
+
+                </label>
+
+                <select class="form-select" [(ngModel)]="selectedStatus">
+
+                    <option [ngValue]="0">
+
+                        Select status
+
+                    </option>
+
+                    <option *ngFor="let status of statuses" [ngValue]="status.numbSta">
+
+                        {{status.nameSta}}
+
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="alert alert-warning">
+
+                Status must follow the workflow:
+                <strong>
+                    Preparation → Dispatch → Shipment → Delivered
+                </strong>.
+                You cannot skip or return to previous statuses.
+
+            </div>
+
+            <button class="btn btn-primary me-2" (click)="save()">
+
+                Update Status
+
+            </button>
+
+            <a class="btn btn-secondary" [routerLink]="['/invoices/details', invoice.numbInv]">
+
+                Cancel
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

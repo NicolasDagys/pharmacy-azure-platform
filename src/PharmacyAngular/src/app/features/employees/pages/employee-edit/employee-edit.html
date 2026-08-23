@@ -1,0 +1,23 @@
+<h2>
+
+    Edit Employee
+
+</h2>
+
+<hr>
+
+<div
+
+    class="alert alert-info"
+
+    *ngIf="loading">
+
+    Loading...
+
+</div>
+
+<app-employee-edit-form
+    [employee]="employee"
+    (save)="save($event)"
+    (back)="goBack()">
+</app-employee-edit-form>

@@ -1,0 +1,31 @@
+<div
+  class="message-row"
+  [class.user-row]="message.role === 'user'"
+  [class.assistant-row]="message.role === 'assistant'"
+>
+  <div
+    class="message-avatar"
+    [class.user-avatar]="message.role === 'user'"
+    [class.assistant-avatar]="message.role === 'assistant'"
+  >
+    @if (message.role === 'user') {
+      <span>U</span>
+    } @else {
+      <span>AI</span>
+    }
+  </div>
+
+  <div
+    class="message-bubble"
+    [class.user-bubble]="message.role === 'user'"
+    [class.assistant-bubble]="message.role === 'assistant'"
+  >
+    <div class="message-content">
+      {{ message.content }}
+    </div>
+
+    <div class="message-time">
+      {{ message.createdAt | date:'HH:mm' }}
+    </div>
+  </div>
+</div>

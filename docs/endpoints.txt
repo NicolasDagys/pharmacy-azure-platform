@@ -1,0 +1,38 @@
+--login
+POST   /api/auth/login
+GET /api/auth/me --Angular obtenga el usuario autenticado desde el JWT
+
+--crud emp
+GET /api/invoices
+GET /api/invoices/{numbInv}
+POST /api/invoices
+PUT /api/invoices/{numbInv}/status
+
+--crud prods
+GET    /api/products
+GET    /api/products/{codProd}
+POST   /api/products
+PUT    /api/products/{codProd}
+DELETE /api/products/{codProd}
+GET /api/products/low-stock  --To get products with low stock
+
+--crud cus
+GET    /api/customers
+GET    /api/customers/{idCus}
+POST   /api/customers
+PUT    /api/customers/{idCus}
+DELETE /api/customers/{idCus}
+
+--crud cat
+GET    /api/categories
+GET    /api/categories/{codeCat}
+POST   /api/categories
+PUT    /api/categories/{codeCat}
+DELETE /api/categories/{codeCat}
+
+GET    /api/invoices  --view all
+GET    /api/invoices/{numbInv}  --details
+POST   /api/invoices    --create
+PUT /api/invoices/{numbInv}/status  --change status
+
+GET    /api/dashboard

@@ -1,0 +1,34 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+    <div class="mb-3">
+
+        <label for="nameEmp" class="form-label">
+
+            Employee Name
+
+        </label>
+
+        <input id="nameEmp" class="form-control" formControlName="nameEmp" autocomplete="name">
+
+        <div class="text-danger mt-2" *ngIf="form.controls.nameEmp.touched && form.controls.nameEmp.invalid">
+
+            Employee name must contain between 3 and 50 characters.
+
+        </div>
+
+    </div>
+
+    <button class="btn btn-primary m-2" type="submit">
+
+        Update Employee
+
+    </button>
+
+    <button class="btn btn-secondary" type="button" (click)="goBack()">
+
+        Back
+
+    </button>
+
+
+</form>

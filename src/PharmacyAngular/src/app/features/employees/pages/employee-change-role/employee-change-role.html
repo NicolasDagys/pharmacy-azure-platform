@@ -1,0 +1,66 @@
+<h2>Change Role</h2>
+
+<hr>
+
+<form
+    [formGroup]="form"
+    (ngSubmit)="submit()">
+
+    <div class="mb-3">
+
+        <label
+            for="roleEmp"
+            class="form-label">
+
+            Role
+
+        </label>
+
+        <select
+            id="roleEmp"
+            class="form-select"
+            formControlName="roleEmp">
+
+            <option value="">
+                Select Role
+            </option>
+
+            <option
+                *ngFor="let role of roles"
+                [value]="role">
+
+                {{ role }}
+
+            </option>
+
+        </select>
+
+        <div
+            class="text-danger mt-2"
+            *ngIf="form.controls.roleEmp.touched &&
+                   form.controls.roleEmp.invalid">
+
+            Select a role.
+
+        </div>
+
+    </div>
+
+    <button
+        class="btn btn-primary me-2"
+        type="submit">
+
+        Update Role
+
+    </button>
+
+    <a
+        class="btn btn-secondary"
+        *ngIf="employee"
+        [routerLink]="['/employees/details', employee.userEmp]">
+
+        Cancel
+
+    </a>
+
+</form>

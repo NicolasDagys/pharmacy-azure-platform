@@ -1,0 +1,31 @@
+<h2>
+
+Create Product
+
+</h2>
+
+<hr>
+
+<div
+class="alert alert-info"
+*ngIf="loading">
+
+Loading...
+
+</div>
+
+<app-product-form
+
+    *ngIf="!loading"
+
+    [categories]="categories"
+
+    [presentationTypes]="presentationTypes"
+
+    [buttonText]="'Create Product'"
+
+    (save)="save($event)"
+
+    (back)="goBack()">
+
+</app-product-form>

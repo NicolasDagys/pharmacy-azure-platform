@@ -1,0 +1,179 @@
+<div class="d-flex justify-content-between mb-3">
+
+    <h2>
+
+        Employees
+
+    </h2>
+
+    <a routerLink="/employees/create" class="btn btn-success">
+
+        Create Employee
+
+    </a>
+
+</div>
+
+<hr>
+
+<div class="alert alert-info" *ngIf="loading">
+
+    Loading employees...
+
+</div>
+
+<div class="alert alert-danger" *ngIf="error">
+
+    Error loading employees.
+
+</div>
+
+<div class="row mb-3">
+
+    <div class="col-md-4">
+
+        <input class="form-control" placeholder="Search employee..." [(ngModel)]="search"
+            (keyup.enter)="loadEmployees()">
+
+    </div>
+
+    <div class="col-auto">
+
+        <button class="btn btn-primary" (click)="loadEmployees()">
+
+            Search
+
+        </button>
+
+    </div>
+
+</div>
+
+<table class="table table-hover" *ngIf="!loading && !error">
+
+    <thead>
+
+        <tr>
+
+            <th (click)="sort('userEmp')" style="cursor:pointer;">
+
+                Username
+
+                <span *ngIf="sortBy==='userEmp'">
+
+                    {{ descending ? '▼' : '▲' }}
+
+                </span>
+
+            </th>
+
+            <th (click)="sort('nameEmp')" style="cursor:pointer;">
+
+                Name
+
+                <span *ngIf="sortBy==='nameEmp'">
+
+                    {{ descending ? '▼' : '▲' }}
+
+                </span>
+
+            </th>
+
+            <th (click)="sort('roleEmp')" style="cursor:pointer;">
+
+                Role
+
+                <span *ngIf="sortBy==='roleEmp'">
+
+                    {{ descending ? '▼' : '▲' }}
+
+                </span>
+
+            </th>
+
+            <th>
+
+                Actions
+
+            </th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        <tr *ngFor="let employee of employees">
+
+            <td>
+
+                {{ employee.userEmp }}
+
+            </td>
+
+            <td>
+
+                {{ employee.nameEmp }}
+
+            </td>
+
+            <td>
+
+                {{ employee.roleEmp }}
+
+            </td>
+
+            <td>
+
+                <button class="btn btn-secondary btn-sm me-2" [routerLink]="['/employees/details', employee.userEmp]">
+
+                    View
+
+                </button>
+
+                <button class="btn btn-primary btn-sm me-2" [routerLink]="['/employees/edit', employee.userEmp]">
+
+                    Edit
+
+                </button>
+
+                <button class="btn btn-danger btn-sm" (click)="openDelete(employee)">
+
+                    Delete
+
+                </button>
+
+            </td>
+
+        </tr>
+
+    </tbody>
+
+</table>
+
+<div class="d-flex justify-content-between mt-3">
+
+    <button class="btn btn-outline-primary" [disabled]="page == 1" (click)="previousPage()">
+
+        Previous
+
+    </button>
+
+    <span>
+
+        Page {{ page }}
+
+    </span>
+
+    <button class="btn btn-outline-primary" (click)="nextPage()">
+
+        Next
+
+    </button>
+
+</div>
+
+<app-confirmation-dialog title="Delete Employee" [message]="'Delete employee ' + selectedEmployee?.nameEmp + '?'"
+    (confirmed)="deleteEmployee()">
+
+</app-confirmation-dialog>

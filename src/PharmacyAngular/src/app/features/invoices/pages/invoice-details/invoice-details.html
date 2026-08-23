@@ -1,0 +1,157 @@
+<h2>
+
+    Invoice Details
+
+</h2>
+
+<hr>
+
+<div
+    class="alert alert-info"
+    *ngIf="loading">
+
+    Loading invoice...
+
+</div>
+
+<div
+    class="card"
+    *ngIf="!loading && invoice">
+
+    <div class="card-body">
+
+        <div class="row mb-3">
+
+            <div class="col-md-4">
+
+                <strong>Invoice Number</strong>
+
+                <div>
+
+                    {{invoice.numbInv}}
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <strong>Date</strong>
+
+                <div>
+
+                    {{invoice.dateInv | date:'yyyy-MM-dd'}}
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <strong>Customer</strong>
+
+                <div>
+
+                    {{invoice.customerName}}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row mb-3">
+
+            <div class="col-md-8">
+
+                <strong>Shipment Address</strong>
+
+                <div>
+
+                    {{invoice.shipmentAddressInv}}
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <strong>Total</strong>
+
+                <div>
+
+                    {{invoice.totalInv | currency}}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <h5>
+
+            Invoice Lines
+
+        </h5>
+
+        <table class="table table-bordered">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+
+                        Product
+
+                    </th>
+
+                    <th>
+
+                        Quantity
+
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr *ngFor="let line of invoice.invoiceLines">
+
+                    <td>
+
+                        {{line.codProd}}
+
+                    </td>
+
+                    <td>
+
+                        {{line.quantity}}
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+        <hr>
+
+        <button
+
+            class="btn btn-secondary"
+
+            routerLink="/invoices">
+
+            Back
+
+        </button>
+
+    </div>
+
+</div>

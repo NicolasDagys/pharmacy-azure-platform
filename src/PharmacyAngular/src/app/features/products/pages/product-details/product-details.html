@@ -1,0 +1,143 @@
+<h2>
+
+    Product Details
+
+</h2>
+
+<hr>
+
+<div class="alert alert-info" *ngIf="loading">
+
+    Loading product...
+
+</div>
+
+<div class="card" *ngIf="!loading && product">
+
+    <div class="card-body">
+
+        <div class="row mb-3">
+
+            <div class="col-md-4">
+
+                <strong>Product Code</strong>
+
+                <div>
+
+                    {{product.codProd}}
+
+                </div>
+
+            </div>
+
+            <div class="col-md-8">
+
+                <strong>Product Name</strong>
+
+                <div>
+
+                    {{product.nameProd}}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row mb-3">
+
+            <div class="col-md-4">
+
+                <strong>Category</strong>
+
+                <div>
+
+                    {{category?.nameCat}}
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <strong>Presentation</strong>
+
+                <div>
+
+                    {{product.presentationTypeProd}}
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <strong>Size</strong>
+
+                <div>
+
+                    {{product.sizeProd}}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row mb-3">
+
+            <div class="col-md-4">
+
+                <strong>Price</strong>
+
+                <div>
+
+                    {{product.priceProd | currency}}
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <strong>Stock</strong>
+
+                <div>
+
+                    {{product.stockQty}}
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <strong>Expiration Date</strong>
+
+                <div>
+
+                    {{product.expDateProd | date:'yyyy-MM-dd'}}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <button class="btn btn-primary me-2" [routerLink]="['/products/edit', product.codProd]">
+
+            Edit Product
+
+        </button>
+
+        <button class="btn btn-secondary" routerLink="/products">
+
+            Back
+
+        </button>
+
+    </div>
+
+</div>

@@ -1,0 +1,29 @@
+<h2>
+
+    Create Invoice
+
+</h2>
+
+<hr>
+
+<div
+    class="alert alert-info"
+    *ngIf="loading">
+
+    Loading...
+
+</div>
+
+<app-invoice-form
+
+    *ngIf="!loading"
+
+    [customers]="customers"
+
+    [products]="products"
+
+    [buttonText]="'Create Invoice'"
+
+    (save)="save($event)">
+
+</app-invoice-form>

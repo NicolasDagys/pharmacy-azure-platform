@@ -1,0 +1,35 @@
+<nav class="navbar navbar-dark bg-dark px-4">
+
+    <span class="navbar-brand">
+
+        Pharmacy ERP
+
+    </span>
+
+    <div>
+
+        <span class="text-white me-3">
+
+            {{ fullName }} ({{ role }})
+
+        </span>
+
+        <a
+            class="btn btn-outline-warning btn-sm me-2"
+            routerLink="/employees/change-password">
+
+            Change Password
+
+        </a>
+
+        <button
+            class="btn btn-outline-light btn-sm"
+            (click)="logout()">
+
+            Logout
+
+        </button>
+
+    </div>
+
+</nav>

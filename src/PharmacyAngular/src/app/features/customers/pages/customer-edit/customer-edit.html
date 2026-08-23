@@ -1,0 +1,33 @@
+<h2>
+
+    Edit Customer
+
+</h2>
+
+<hr>
+
+<div
+
+    class="alert alert-info"
+
+    *ngIf="loading">
+
+    Loading...
+
+</div>
+
+<app-customer-form
+
+    *ngIf="!loading && customer"
+
+    [customer]="customer"
+
+    [editMode]="true"
+
+    [buttonText]="'Update Customer'"
+
+    (save)="save($event)"
+
+    (back)="goBack()">
+
+</app-customer-form>

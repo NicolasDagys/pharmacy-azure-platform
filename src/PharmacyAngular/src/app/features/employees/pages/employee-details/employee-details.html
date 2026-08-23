@@ -1,0 +1,95 @@
+<h2>
+
+    Employee Details
+
+</h2>
+
+<hr>
+
+<div class="alert alert-info" *ngIf="loading">
+
+    Loading employee...
+
+</div>
+
+<div class="card" *ngIf="!loading && employee">
+
+    <div class="card-body">
+
+        <div class="row mb-4">
+
+            <div class="col-md-4">
+
+                <strong>Username</strong>
+
+                <div>
+
+                    {{employee.userEmp}}
+
+                </div>
+
+            </div>
+
+            <div class="col-md-8">
+
+                <strong>Name</strong>
+
+                <div>
+
+                    {{employee.nameEmp}}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row mb-4">
+
+            <div class="col-md-4">
+
+                <strong>Role</strong>
+
+                <div>
+
+                    {{employee.roleEmp}}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <h5 class="mb-3">
+
+            Actions
+
+        </h5>
+
+        <div class="d-flex flex-wrap gap-2">
+
+            <button class="btn btn-primary" [routerLink]="['/employees/edit', employee.userEmp]">
+
+                Edit Information
+
+            </button>
+
+            <button class="btn btn-info text-white" [routerLink]="['/employees/change-role', employee.userEmp]">
+
+                Change Role
+
+            </button>
+
+            <button class="btn btn-secondary" routerLink="/employees">
+
+                Back
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
