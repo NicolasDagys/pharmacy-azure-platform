@@ -621,7 +621,7 @@ Pharmacy-Azure-Platform/
 │
 ├── .dockerignore
 ├── .gitignore
-├── .env
+├── .env.example
 ├── docker-compose.yml
 ├── deploy.ps1
 └── README.md
@@ -669,7 +669,7 @@ az cognitiveservices account purge --name "pharmacy-ai-dev" --resource-group "RG
 
 ### 1. Clone the repository
 
-git clone https://github.com/YOUR_USERNAME/Pharmacy-Azure-Platform.git
+git clone https://github.com/NicolasDagys/pharmacy-azure-platform.git
 
 cd Pharmacy-Azure-Platform
 
