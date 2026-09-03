@@ -1,0 +1,35 @@
+<h2>
+
+    Edit Product
+
+</h2>
+
+<hr>
+
+<div
+    class="alert alert-info"
+    *ngIf="loading">
+
+    Loading...
+
+</div>
+
+<app-product-form
+
+    *ngIf="!loading && product"
+
+    [product]="product"
+
+    [categories]="categories"
+
+    [presentationTypes]="presentationTypes"
+
+    [editMode]="true"
+
+    [buttonText]="'Update Product'"
+
+    (save)="save($event)"
+
+    (back)="goBack()">
+
+</app-product-form>

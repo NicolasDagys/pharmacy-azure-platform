@@ -1,0 +1,195 @@
+<div class="d-flex justify-content-between mb-3">
+
+    <h2>
+
+        Customers
+
+    </h2>
+
+    <a routerLink="/customers/create" class="btn btn-success">
+
+        Create Customer
+
+    </a>
+
+</div>
+
+<hr>
+
+<div class="alert alert-info" *ngIf="loading">
+
+    Loading customers...
+
+</div>
+
+<div class="alert alert-danger" *ngIf="error">
+
+    Error loading customers.
+
+</div>
+
+<div class="row mb-3">
+
+    <div class="col-md-4">
+
+        <input class="form-control" placeholder="Search customer..." [(ngModel)]="search"
+            (keyup.enter)="loadCustomers()">
+
+    </div>
+
+    <div class="col-auto">
+
+        <button class="btn btn-primary" (click)="loadCustomers()">
+
+            Search
+
+        </button>
+
+    </div>
+
+</div>
+
+<table class="table table-hover" *ngIf="!loading && !error">
+
+    <thead>
+
+        <tr>
+
+            <th (click)="sort('IdCus')" style="cursor:pointer;">
+
+                ID
+
+                <span *ngIf="sortBy==='IdCus'">
+
+                    {{descending ? '▼' : '▲'}}
+
+                </span>
+
+            </th>
+
+            <th (click)="sort('NameCus')" style="cursor:pointer;">
+
+                Name
+
+                <span *ngIf="sortBy==='NameCus'">
+
+                    {{descending ? '▼' : '▲'}}
+
+                </span>
+
+            </th>
+
+            <th (click)="sort('MailCus')" style="cursor:pointer;">
+
+                Email
+
+                <span *ngIf="sortBy==='MailCus'">
+
+                    {{descending ? '▼' : '▲'}}
+
+                </span>
+
+            </th>
+
+            <th (click)="sort('PhoneCus')" style="cursor:pointer;">
+
+                Phone
+
+                <span *ngIf="sortBy==='PhoneCus'">
+
+                    {{descending ? '▼' : '▲'}}
+
+                </span>
+
+            </th>
+
+            <th>
+
+                Actions
+
+            </th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        <tr *ngFor="let customer of customers">
+
+            <td>
+
+                {{customer.idCus}}
+
+            </td>
+
+            <td>
+
+                {{customer.nameCus}}
+
+            </td>
+
+            <td>
+
+                {{customer.mailCus}}
+
+            </td>
+
+            <td>
+
+                {{customer.phoneCus}}
+
+            </td>
+
+            <td>
+
+                <button class="btn btn-secondary btn-sm me-2" [routerLink]="['/customers/details', customer.idCus]">
+
+                    View
+
+                </button>
+
+                <button class="btn btn-primary btn-sm me-2" [routerLink]="['/customers/edit', customer.idCus]">
+
+                    Edit
+
+                </button>
+
+                <button *ngIf="canDelete" class="btn btn-danger btn-sm" (click)="openDelete(customer)">
+                    Delete
+                </button>
+
+            </td>
+
+        </tr>
+
+    </tbody>
+
+</table>
+
+<div class="d-flex justify-content-between mt-3">
+
+    <button class="btn btn-outline-primary" [disabled]="page==1" (click)="previousPage()">
+
+        Previous
+
+    </button>
+
+    <span>
+
+        Page {{page}}
+
+    </span>
+
+    <button class="btn btn-outline-primary" (click)="nextPage()">
+
+        Next
+
+    </button>
+
+</div>
+
+<app-confirmation-dialog title="Delete Customer" [message]="'Delete customer ' + selectedCustomer?.nameCus + '?'"
+    (confirmed)="deleteCustomer()">
+
+</app-confirmation-dialog>

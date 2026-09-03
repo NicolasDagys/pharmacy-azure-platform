@@ -1,0 +1,251 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+    <div class="row">
+
+        <!-- Product Code -->
+
+        <div class="col-md-4 mb-3">
+
+            <label class="form-label">
+
+                Product Code
+
+            </label>
+
+            <input class="form-control" formControlName="codProd">
+
+            <div class="text-danger mt-1" *ngIf="
+                    form.controls.codProd.touched &&
+                    form.controls.codProd.hasError('required')">
+
+                Product Code is required.
+
+            </div>
+
+            <div class="text-danger mt-1" *ngIf="
+                    form.controls.codProd.touched &&
+                    form.controls.codProd.hasError('pattern')">
+
+                Format must be AAA9999999.
+
+            </div>
+
+        </div>
+
+        <!-- Product Name -->
+
+        <div class="col-md-8 mb-3">
+
+            <label class="form-label">
+
+                Product Name
+
+            </label>
+
+            <input class="form-control" formControlName="nameProd">
+
+            <div class="text-danger mt-1" *ngIf="
+                    form.controls.nameProd.touched &&
+                    form.controls.nameProd.hasError('required')">
+
+                Product Name is required.
+
+            </div>
+
+            <div class="text-danger mt-1" *ngIf="
+                    form.controls.nameProd.touched &&
+                    form.controls.nameProd.hasError('minlength')">
+
+                Must contain at least 3 characters.
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <!-- Category -->
+
+        <div class="col-md-4 mb-3">
+
+            <label class="form-label">
+
+                Category
+
+            </label>
+
+            <select class="form-select" formControlName="codeCat">
+
+                <option value="">
+
+                    Select Category
+
+                </option>
+
+                <option *ngFor="let category of categories" [value]="category.codeCat">
+
+                    {{ category.nameCat }}
+
+                </option>
+
+            </select>
+
+            <div class="text-danger mt-1" *ngIf="
+                    form.controls.codeCat.touched &&
+                    form.controls.codeCat.invalid">
+
+                Select a category.
+
+            </div>
+
+        </div>
+
+        <!-- Presentation -->
+
+        <div class="col-md-4 mb-3">
+
+            <label class="form-label">
+
+                Presentation
+
+            </label>
+
+            <select class="form-select" formControlName="presentationTypeProd">
+
+                <option value="">
+
+                    Select Presentation
+
+                </option>
+
+                <option *ngFor="let presentation of presentationTypes" [value]="presentation">
+
+                    {{ presentation }}
+
+                </option>
+
+            </select>
+
+            <div class="text-danger mt-1" *ngIf="
+                    form.controls.presentationTypeProd.touched &&
+                    form.controls.presentationTypeProd.invalid">
+
+                Select a presentation type.
+
+            </div>
+
+        </div>
+
+        <!-- Size -->
+
+        <div class="col-md-4 mb-3">
+
+            <label class="form-label">
+
+                Size
+
+            </label>
+
+            <input type="number" class="form-control" formControlName="sizeProd">
+
+            <div class="text-danger mt-1" *ngIf="
+                    form.controls.sizeProd.touched &&
+                    form.controls.sizeProd.invalid">
+
+                Size must be greater than zero.
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <!-- Price -->
+
+        <div class="col-md-4 mb-3">
+
+            <label class="form-label">
+
+                Price
+
+            </label>
+
+            <input type="number" class="form-control" formControlName="priceProd">
+
+            <div class="text-danger mt-1" *ngIf="
+                    form.controls.priceProd.touched &&
+                    form.controls.priceProd.invalid">
+
+                Enter a price greater than zero.
+
+            </div>
+
+        </div>
+
+        <!-- Stock -->
+
+        <div class="col-md-4 mb-3">
+
+            <label class="form-label">
+
+                Stock
+
+            </label>
+
+            <input type="number" class="form-control" formControlName="stockQty">
+
+            <div class="text-danger mt-1" *ngIf="
+                    form.controls.stockQty.touched &&
+                    form.controls.stockQty.invalid">
+
+                Stock must be greater than zero.
+
+            </div>
+
+        </div>
+
+        <!-- Expiration -->
+
+        <div class="col-md-4 mb-3">
+
+            <label class="form-label">
+
+                Expiration Date
+
+            </label>
+
+            <input type="date" class="form-control" formControlName="expDateProd">
+
+            <div class="text-danger mt-1" *ngIf="
+                    form.controls.expDateProd.touched &&
+                    form.controls.expDateProd.invalid">
+
+                Expiration Date is required.
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="mt-3">
+
+        <button class="btn btn-primary me-2" type="submit">
+
+            {{ buttonText }}
+
+        </button>
+
+        <button class="btn btn-secondary" type="button" (click)="goBack()">
+
+            Back
+
+        </button>
+
+    </div>
+
+</form>

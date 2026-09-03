@@ -1,0 +1,271 @@
+<form #form="ngForm" (ngSubmit)="submit()">
+
+    <div class="card">
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+
+                        Customer
+
+                    </label>
+
+                    <select class="form-select" name="customer" [(ngModel)]="invoice.idCus" required #customer="ngModel"
+                        [disabled]="invoice.invoiceLines.length > 0">
+
+                        <option value="">
+
+                            Select customer
+
+                        </option>
+
+                        <option *ngFor="let customer of customers" [value]="customer.idCus">
+
+                            {{customer.nameCus}}
+
+                        </option>
+
+                    </select>
+
+                    <div class="text-danger mt-1" *ngIf="customer.invalid && customer.touched">
+
+                        Customer is required.
+
+                    </div>
+
+                </div>
+                <div class="text-muted mt-1" *ngIf="invoice.invoiceLines.length > 0">
+
+                    Customer cannot be changed after products have been added.
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+
+                        Shipment Address
+
+                    </label>
+
+                    <input class="form-control" type="text" name="shipmentAddress"
+                        [(ngModel)]="invoice.shipmentAddressInv" required minlength="5" maxlength="50"
+                        #address="ngModel">
+
+                    <div class="text-danger mt-1" *ngIf="address.errors?.['required'] && address.touched">
+
+                        Shipment address is required.
+
+                    </div>
+
+                    <div class="text-danger mt-1" *ngIf="address.errors?.['minlength']">
+
+                        Shipment address must contain at least 5 characters.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <h5>
+
+                Invoice Lines
+
+            </h5>
+
+            <div class="row align-items-end">
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+
+                        Product
+
+                    </label>
+
+                    <select class="form-select" [(ngModel)]="selectedProduct" name="selectedProduct">
+
+                        <option value="">
+
+                            Select product
+
+                        </option>
+
+                        <option *ngFor="let product of products" [value]="product.codProd">
+
+                            {{product.nameProd}}
+                            -
+                            {{product.priceProd | currency}}
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-3 mb-3">
+
+                    <label class="form-label">
+
+                        Quantity
+
+                    </label>
+
+                    <input class="form-control" type="number" min="1" [(ngModel)]="quantity" name="quantity">
+
+                </div>
+
+                <div class="col-md-3 mb-3">
+
+                    <button type="button" class="btn btn-primary w-100" (click)="addLine()">
+
+                        Add Product
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="alert alert-warning" *ngIf="invoice.invoiceLines.length==0">
+
+                No products added.
+
+            </div>
+
+            <table class="table table-bordered table-hover" *ngIf="invoice.invoiceLines.length>0">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+
+                            Product
+
+                        </th>
+
+                        <th>
+
+                            Unit Price
+
+                        </th>
+
+                        <th>
+
+                            Quantity
+
+                        </th>
+
+                        <th>
+
+                            Line Total
+
+                        </th>
+
+                        <th width="120">
+
+                            Actions
+
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr *ngFor="let line of invoice.invoiceLines; let i=index">
+
+                        <td>
+
+                            {{getProductName(line.codProd)}}
+
+                        </td>
+
+                        <td>
+
+                            {{getUnitPrice(line.codProd) | currency}}
+
+                        </td>
+
+                        <td>
+
+                            {{line.quantity}}
+
+                        </td>
+
+                        <td>
+
+                            {{getLineTotal(line) | currency}}
+
+                        </td>
+
+                        <td>
+
+                            <button type="button" class="btn btn-danger btn-sm" (click)="removeLine(i)">
+
+                                Remove
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+                <tfoot>
+
+                    <tr>
+
+                        <th colspan="3" class="text-end">
+
+                            Total
+
+                        </th>
+
+                        <th>
+
+                            {{getInvoiceTotal() | currency}}
+
+                        </th>
+
+                        <th>
+
+                        </th>
+
+                    </tr>
+
+                </tfoot>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div class="mt-3">
+
+        <button class="btn btn-success me-2" type="submit" [disabled]="form.invalid || invoice.invoiceLines.length==0">
+
+            {{buttonText}}
+
+        </button>
+
+        <a routerLink="/invoices" class="btn btn-secondary">
+
+            Cancel
+
+        </a>
+
+    </div>
+
+</form>

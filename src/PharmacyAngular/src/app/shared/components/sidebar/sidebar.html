@@ -1,0 +1,45 @@
+<div class="list-group rounded-0">
+
+    <a routerLink="/dashboard" routerLinkActive="active" class="list-group-item list-group-item-action">
+
+        Dashboard
+
+    </a>
+
+    <a routerLink="/products" routerLinkActive="active" class="list-group-item list-group-item-action   ">
+
+        Products
+
+    </a>
+
+    <a routerLink="/categories" routerLinkActive="active" class="list-group-item list-group-item-action">
+
+        Categories
+
+    </a>
+
+    <a *ngIf="canViewCustomers" routerLink="/customers" routerLinkActive="active"
+        class="list-group-item list-group-item-action">
+
+        Customers
+
+    </a>
+
+    <a *ngIf="canViewEmployees" routerLink="/employees" routerLinkActive="active"
+        class="list-group-item list-group-item-action">
+
+        Employees
+
+    </a>
+
+    <a routerLink="/invoices" routerLinkActive="active" class="list-group-item list-group-item-action">
+
+        Invoices
+
+    </a>
+
+    <a routerLink="inventory/chat" routerLinkActive="active" class="list-group-item list-group-item-action">
+
+        AI Assistant
+    </a>
+</div>

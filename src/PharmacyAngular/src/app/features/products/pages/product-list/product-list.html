@@ -1,0 +1,188 @@
+<div class="d-flex justify-content-between mb-3">
+
+    <h2>
+
+        Products
+
+    </h2>
+
+    <a *ngIf="canManageProducts" routerLink="/products/create" class="btn btn-success">
+
+        Create Product
+
+    </a>
+
+</div>
+
+<hr>
+
+<div class="alert alert-info" *ngIf="loading">
+
+    Loading products...
+
+</div>
+
+<div class="alert alert-danger" *ngIf="error">
+
+    Error loading products.
+
+</div>
+<div class="row mb-3">
+
+    <div class="col-md-4">
+
+        <input class="form-control" placeholder="Search product..." [(ngModel)]="search" (keyup.enter)="loadProducts()">
+
+    </div>
+
+    <div class="col-auto">
+
+        <button class="btn btn-primary" (click)="loadProducts()">
+
+            Search
+
+        </button>
+
+    </div>
+
+</div>
+<table class="table table-hover" *ngIf="!loading && !error">
+
+    <thead>
+
+        <tr>
+
+            <th (click)="sort('CodProd')" style="cursor:pointer;">
+
+                Code
+
+                <span *ngIf="sortBy==='CodProd'">
+
+                    {{descending ? '▼' : '▲'}}
+
+                </span>
+
+
+            </th>
+
+            <th (click)="sort('NameProd')" style="cursor:pointer;">
+
+                Name
+
+                <span *ngIf="sortBy==='NameProd'">
+
+                    {{descending ? '▼' : '▲'}}
+
+                </span>
+
+            </th>
+
+            <th (click)="sort('PriceProd')" style="cursor:pointer;">
+
+                Price
+
+                <span *ngIf="sortBy==='PriceProd'">
+
+                    {{descending ? '▼' : '▲'}}
+
+                </span>
+
+            </th>
+
+            <th (click)="sort('StockQty')" style="cursor:pointer;">
+
+                Stock
+
+                <span *ngIf="sortBy==='StockQty'">
+
+                    {{descending ? '▼' : '▲'}}
+
+                </span>
+
+            </th>
+
+            <th (click)="sort('ExpDateProd')" style="cursor:pointer;">
+
+                Expiration Date
+
+                <span *ngIf="sortBy==='ExpDateProd'">
+
+                    {{descending ? '▼' : '▲'}}
+
+                </span>
+
+            </th>
+            <th>
+
+                Actions
+
+            </th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        <tr *ngFor="let product of products">
+
+            <td>{{product.codProd}}</td>
+
+            <td>{{product.nameProd}}</td>
+
+            <td>{{product.priceProd}}</td>
+
+            <td>{{product.stockQty}}</td>
+
+            <td>{{product.expDateProd}}</td>
+
+            <td>
+                <button class="btn btn-secondary btn-sm me-2" [routerLink]="['/products/details', product.codProd]">
+
+                    View
+
+                </button>
+                <button *ngIf="canManageProducts" class="btn btn-primary btn-sm me-2"
+                    [routerLink]="['/products/edit', product.codProd]">
+
+                    Edit
+
+                </button>
+
+                <button *ngIf="canManageProducts" class="btn btn-danger btn-sm" (click)="openDelete(product)">
+
+                    Delete
+
+                </button>
+
+            </td>
+
+        </tr>
+
+    </tbody>
+
+</table>
+<div class="d-flex justify-content-between mt-3">
+
+    <button class="btn btn-outline-primary" [disabled]="page==1" (click)="previousPage()">
+
+        Previous
+
+    </button>
+
+    <span>
+
+        Page {{page}}
+
+    </span>
+
+    <button class="btn btn-outline-primary" (click)="nextPage()">
+
+        Next
+
+    </button>
+
+</div>
+<app-confirmation-dialog title="Delete Product" [message]="'Delete product ' + selectedProduct?.nameProd + '?'"
+    (confirmed)="deleteProduct()">
+
+</app-confirmation-dialog>>

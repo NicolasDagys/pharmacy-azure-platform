@@ -1,0 +1,124 @@
+<h2>
+
+Dashboard
+
+</h2>
+
+<hr>
+
+<div *ngIf="loading" class="alert alert-info">
+
+    Loading dashboard...
+
+</div>
+
+<div *ngIf="error" class="alert alert-danger">
+
+    Error loading dashboard.
+
+</div>
+
+<div
+class="row"
+*ngIf="dashboard">
+
+    <div class="col-md-3 mb-3">
+
+        <app-stat-card
+
+            title="Active Products"
+
+            [value]="dashboard.activeProducts">
+
+        </app-stat-card>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <app-stat-card
+
+            title="Customers"
+
+            [value]="dashboard.totalCustomers">
+
+        </app-stat-card>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <app-stat-card
+
+            title="Monthly Revenue"
+
+            [value]="dashboard.monthlyRevenue">
+
+        </app-stat-card>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <app-stat-card
+
+            title="Pending Invoices"
+
+            [value]="dashboard.pendingInvoices">
+
+        </app-stat-card>
+
+    </div>
+
+</div>
+<div class="row mt-2" *ngIf="dashboard">
+
+    <div class="col-md-3 mb-3">
+
+        <app-stat-card
+
+            title="Low Stock"
+
+            [value]="dashboard.lowStockProducts">
+
+        </app-stat-card>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <app-stat-card
+
+            title="Out Of Stock"
+
+            [value]="dashboard.outOfStockProducts">
+
+        </app-stat-card>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <app-stat-card
+
+            title="Expiring Soon"
+
+            [value]="dashboard.productsExpiringSoon">
+
+        </app-stat-card>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <app-stat-card
+
+            title="Delivered Orders"
+
+            [value]="dashboard.deliveredOrders">
+
+        </app-stat-card>
+
+    </div>
+
+</div>

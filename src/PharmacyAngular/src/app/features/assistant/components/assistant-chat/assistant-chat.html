@@ -1,0 +1,63 @@
+<div class="chat-card">
+
+  <div class="chat-header">
+
+    <div>
+      <h2>AI Inventory Assistant</h2>
+      <p>Ask questions about your pharmacy inventory.</p>
+    </div>
+
+    <button
+      type="button"
+      class="clear-button"
+      (click)="clearConversation()"
+      [disabled]="isLoading"
+    >
+      Clear
+    </button>
+
+  </div>
+
+  <div
+    #messagesContainer
+    class="messages-container"
+  >
+
+    @for (message of messages; track message.id) {
+      <app-assistant-message
+        [message]="message"
+      />
+    }
+
+    @if (isLoading) {
+      <div class="loading-row">
+
+        <div class="loading-avatar">
+          AI
+        </div>
+
+        <div class="loading-bubble">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+      </div>
+    }
+
+    @if (errorMessage) {
+      <div class="error-message">
+        {{ errorMessage }}
+      </div>
+    }
+
+  </div>
+
+  <div class="chat-input">
+    <app-assistant-input
+      [isDisabled]="isLoading"
+      (sendMessage)="sendMessage($event)"
+    />
+  </div>
+
+</div>

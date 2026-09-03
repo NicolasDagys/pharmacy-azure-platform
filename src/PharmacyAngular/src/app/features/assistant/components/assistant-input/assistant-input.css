@@ -1,0 +1,54 @@
+.input-container {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 14px;
+  background: white;
+}
+
+textarea {
+  flex: 1;
+  resize: none;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 24px;
+  max-height: 120px;
+  background: transparent;
+}
+
+textarea:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.send-button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.send-button:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.send-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.input-hint {
+  margin-top: 6px;
+  font-size: 11px;
+  color: #6b7280;
+  text-align: right;
+}

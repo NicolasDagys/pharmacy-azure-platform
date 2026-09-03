@@ -1,0 +1,25 @@
+<div class="input-container">
+
+  <textarea
+    [(ngModel)]="message"
+    [disabled]="isDisabled"
+    (keydown)="onKeyDown($event)"
+    placeholder="Ask something about your inventory..."
+    rows="1"
+  ></textarea>
+
+  <button
+    type="button"
+    class="send-button"
+    [disabled]="isDisabled || !message.trim()"
+    (click)="submit()"
+    aria-label="Send message"
+  >
+    ➤
+  </button>
+
+</div>
+
+<div class="input-hint">
+  Press Enter to send · Shift + Enter for a new line
+</div>

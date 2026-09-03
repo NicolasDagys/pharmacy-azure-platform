@@ -1,0 +1,71 @@
+<div class="container vh-100 d-flex justify-content-center align-items-center">
+
+    <div class="card shadow p-4" style="width: 400px;">
+
+        <h2 class="text-center mb-4">
+            Pharmacy ERP
+        </h2>
+
+        <form [formGroup]="loginForm">
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Username
+                </label>
+
+                <input
+                    class="form-control"
+                    formControlName="userEmp">
+
+                @if(loginForm.controls.userEmp.invalid &&
+                    loginForm.controls.userEmp.touched){
+
+                    <small class="text-danger">
+
+                        Username is required.
+
+                    </small>
+
+                }
+
+            </div>
+
+            <div class="mb-4">
+
+                <label class="form-label">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    class="form-control"
+                    formControlName="password">
+
+                @if(loginForm.controls.password.invalid &&
+                    loginForm.controls.password.touched){
+
+                    <small class="text-danger">
+
+                        Password is required.
+
+                    </small>
+
+                }
+
+            </div>
+
+            <button
+                class="btn btn-primary w-100"
+                type="button"
+                (click)="login()">
+
+                Sign In
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

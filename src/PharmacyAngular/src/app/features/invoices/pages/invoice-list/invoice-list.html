@@ -1,0 +1,221 @@
+<div class="d-flex justify-content-between mb-3">
+
+    <h2>
+
+        Invoices
+
+    </h2>
+
+    <a *ngIf="canManageInvoices" routerLink="/invoices/create" class="btn btn-success">
+
+        Create Invoice
+
+    </a>
+
+</div>
+
+<hr>
+
+<div class="row mb-3">
+
+    <div class="col-md-4">
+
+        <input class="form-control" placeholder="Search invoice..." [(ngModel)]="search" (keyup.enter)="loadInvoices()">
+
+    </div>
+
+    <div class="col-auto">
+
+        <button class="btn btn-primary" (click)="loadInvoices()">
+
+            Search
+
+        </button>
+
+    </div>
+
+</div>
+
+<div class="alert alert-info" *ngIf="loading">
+
+    Loading invoices...
+
+</div>
+
+<div class="alert alert-danger" *ngIf="error">
+
+    Error loading invoices.
+
+</div>
+
+<table class="table table-bordered table-hover" *ngIf="!loading && !error">
+
+    <thead>
+
+        <tr>
+
+            <th (click)="sort('NumbInv')" style="cursor:pointer;">
+
+                Number
+
+                <span *ngIf="sortBy === 'NumbInv'">
+
+                    {{descending ? '▼' : '▲'}}
+
+                </span>
+
+            </th>
+
+            <th (click)="sort('DateInv')" style="cursor:pointer;">
+
+                Date
+
+                <span *ngIf="sortBy === 'DateInv'">
+
+                    {{descending ? '▼' : '▲'}}
+
+                </span>
+
+            </th>
+
+            <th (click)="sort('IdCus')" style="cursor:pointer;">
+
+                Customer
+
+                <span *ngIf="sortBy === 'IdCus'">
+
+                    {{descending ? '▼' : '▲'}}
+
+                </span>
+
+            </th>
+
+            <th (click)="sort('ShipmentAddressInv')" style="cursor:pointer;">
+
+                Shipment Address
+
+                <span *ngIf="sortBy === 'ShipmentAddressInv'">
+
+                    {{descending ? '▼' : '▲'}}
+
+                </span>
+
+            </th>
+
+            <th (click)="sort('Status')" style="cursor:pointer;">
+
+                Status
+
+                <span *ngIf="sortBy === 'Status'">
+
+                    {{descending ? '▼' : '▲'}}
+
+                </span>
+
+            </th>
+
+            <th (click)="sort('TotalInv')" style="cursor:pointer;">
+
+                Total
+
+                <span *ngIf="sortBy === 'TotalInv'">
+
+                    {{descending ? '▼' : '▲'}}
+
+                </span>
+
+            </th>
+
+            <th width="220">
+
+                Actions
+
+            </th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        <tr *ngFor="let invoice of invoices">
+
+            <td>
+
+                {{invoice.numbInv}}
+
+            </td>
+
+            <td>
+
+                {{invoice.dateInv | date:'yyyy-MM-dd'}}
+
+            </td>
+
+            <td>
+
+                {{invoice.idCus}}
+
+            </td>
+
+            <td>
+
+                {{invoice.shipmentAddressInv}}
+
+            </td>
+
+            <td>
+
+                {{invoice.status}}
+
+            </td>
+
+            <td>
+
+                {{invoice.totalInv | currency}}
+
+            </td>
+
+            <td>
+
+                <a class="btn btn-primary btn-sm me-2" [routerLink]="['/invoices/details', invoice.numbInv]">
+
+                    Details
+
+                </a>
+
+                <a class="btn btn-warning btn-sm" [routerLink]="['/invoices/status', invoice.numbInv]">
+
+                    Change Status
+
+                </a>
+
+            </td>
+
+        </tr>
+
+    </tbody>
+
+</table>
+
+<div class="d-flex justify-content-between mt-3">
+
+    <button class="btn btn-outline-primary" [disabled]="page == 1" (click)="previousPage()">
+
+        Previous
+
+    </button>
+
+    <span>
+
+        Page {{page}}
+
+    </span>
+
+    <button class="btn btn-outline-primary" (click)="nextPage()">
+
+        Next
+
+    </button>
+
+</div>

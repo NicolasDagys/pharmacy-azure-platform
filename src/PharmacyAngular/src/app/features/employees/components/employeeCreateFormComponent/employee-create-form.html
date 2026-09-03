@@ -1,0 +1,126 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+    <div class="row">
+
+        <div class="col-md-4 mb-3">
+
+            <label for="userEmp" class="form-label">
+
+                Username
+
+            </label>
+
+            <input id="userEmp" class="form-control" autocomplete="username" formControlName="userEmp">
+
+            <div class="text-danger mt-1" *ngIf="form.controls.userEmp.touched && form.controls.userEmp.invalid">
+
+                Username must contain between 3 and 50 characters.
+
+            </div>
+
+        </div>
+
+        <div class="col-md-8 mb-3">
+
+            <label for="nameEmp" class="form-label">
+
+                Employee Name
+
+            </label>
+
+            <input id="nameEmp" class="form-control" autocomplete="name" formControlName="nameEmp">
+
+            <div class="text-danger mt-1" *ngIf="form.controls.nameEmp.touched && form.controls.nameEmp.invalid">
+
+                Employee name must contain between 3 and 50 characters.
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6 mb-3">
+
+            <label for="password" class="form-label">
+
+                Temporary Password
+
+            </label>
+
+            <input id="password" type="password" class="form-control" autocomplete="new-password"
+                formControlName="password">
+
+            <div class="text-danger mt-2" *ngIf="form.controls.password.touched && form.controls.password.invalid">
+
+                Password must:
+
+                <ul class="mb-0 mt-2">
+
+                    <li>contain at least 8 characters</li>
+
+                    <li>contain one uppercase letter</li>
+
+                    <li>contain one lowercase letter</li>
+
+                    <li>contain one number</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 mb-3">
+
+            <label for="roleEmp" class="form-label">
+
+                Role
+
+            </label>
+
+            <select id="roleEmp" class="form-select" formControlName="roleEmp">
+
+                <option value="">
+
+                    Select Role
+
+                </option>
+
+                <option *ngFor="let role of roles" [value]="role">
+
+                    {{ role }}
+
+                </option>
+
+            </select>
+
+            <div class="text-danger mt-1" *ngIf="form.controls.roleEmp.touched && form.controls.roleEmp.invalid">
+
+                Select a role.
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="mt-3">
+
+        <button class="btn btn-primary m-2" type="submit">
+
+            Create Employee
+
+        </button>
+
+        <button class="btn btn-secondary" type="button" (click)="goBack()">
+
+            Back
+
+        </button>
+
+    </div>
+
+</form>

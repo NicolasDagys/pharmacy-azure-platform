@@ -1,0 +1,31 @@
+<h2>
+
+    Edit Category
+
+</h2>
+
+<hr>
+
+<div
+    class="alert alert-info"
+    *ngIf="loading">
+
+    Loading...
+
+</div>
+
+<app-category-form
+
+    *ngIf="!loading && category"
+
+    [category]="category"
+
+    [editMode]="true"
+
+    [buttonText]="'Update Category'"
+
+    (save)="save($event)"
+
+    (back)="goBack()">
+
+</app-category-form>

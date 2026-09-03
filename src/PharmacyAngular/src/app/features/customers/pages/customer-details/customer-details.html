@@ -1,0 +1,99 @@
+<h2>
+
+    Customer Details
+
+</h2>
+
+<hr>
+
+<div
+    class="alert alert-info"
+    *ngIf="loading">
+
+    Loading customer...
+
+</div>
+
+<div
+    class="card"
+    *ngIf="!loading && customer">
+
+    <div class="card-body">
+
+        <div class="row mb-3">
+
+            <div class="col-md-4">
+
+                <strong>ID</strong>
+
+                <div>
+
+                    {{ customer.idCus }}
+
+                </div>
+
+            </div>
+
+            <div class="col-md-8">
+
+                <strong>Name</strong>
+
+                <div>
+
+                    {{ customer.nameCus }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row mb-3">
+
+            <div class="col-md-6">
+
+                <strong>Email</strong>
+
+                <div>
+
+                    {{ customer.mailCus }}
+
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <strong>Phone</strong>
+
+                <div>
+
+                    {{ customer.phoneCus || '-' }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <button
+            class="btn btn-primary me-2"
+            [routerLink]="['/customers/edit', customer.idCus]">
+
+            Edit Customer
+
+        </button>
+
+        <button
+            class="btn btn-secondary"
+            routerLink="/customers">
+
+            Back
+
+        </button>
+
+    </div>
+
+</div>
