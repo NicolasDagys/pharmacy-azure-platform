@@ -60,10 +60,6 @@ Write-Host "Current IP: $PublicIp"
 # FASE 1: Infra base (sin imágenes)
 # ==========================================
 
-# ==========================================
-# FASE 1: Infra base (sin imágenes) - CORREGIDO
-# ==========================================
-
 Write-Host ""
 Write-Host "Deploying base infrastructure..."
 
@@ -97,7 +93,6 @@ if ($LASTEXITCODE -ne 0) {
 
 # Convertimos a JSON una ÚNICA VEZ ahora que sabemos que el comando fue exitoso
 $deployment = $deploymentRawJson | ConvertFrom-Json
-
 
 $SqlServerName               = $deployment.properties.outputs.sqlServerName.value
 $DatabaseName                = $deployment.properties.outputs.databaseName.value

@@ -638,6 +638,7 @@ The deployment environment requires:
 * Azure CLI
 * PowerShell
 * Docker-compatible development environment
+* sqlcmd
 * Azure subscription
 * Authenticated Azure CLI session
 
@@ -669,15 +670,20 @@ az cognitiveservices account purge --name "pharmacy-ai-dev" --resource-group "RG
 
 ### 1. Clone the repository
 
+```git
 git clone https://github.com/NicolasDagys/pharmacy-azure-platform.git
 
-cd Pharmacy-Azure-Platform
+cd pharmacy-azure-platform
+
+```
 
 ### 2. Configure deployment secrets
 
 Copy the example environment file:
 
+```powershell
 Copy-Item .env.example .env
+```
 
 Edit `.env` and provide your own values:
 
@@ -696,13 +702,17 @@ Set your Azure region, resource group, environment and Action Group email.
 
 ### 4. Login to Azure
 
+```bash
 az login
+```
 
 Make sure the selected subscription has sufficient permissions to create Azure resources.
 
 ### 5. Deploy the platform
 
+```powershell
 .\deploy.ps1
+```
 
 The deployment script provisions the Azure infrastructure, builds the container images in Azure Container Registry, initializes the database and deploys the API and Angular frontend.
 
@@ -800,9 +810,9 @@ Microsoft Certified:
 * AZ-900 — Microsoft Azure Fundamentals
 * AZ-104 — Microsoft Azure Administrator Associate
 
-<img src="https://flaticon.com" alt="LinkedIn" width="20" height="20" /> [Nicolás Dagys](https://linkedin.com)
+[![LinkedIn](https://shields.io)](https://www.linkedin.com/in/nicol%C3%A1s-dagys-07397a226) Nicolás Dagys
 
-<img src="https://flaticon.com" alt="Gmail" width="20" height="20" /> [nicolasdagys@gmail.com](mailto:nicolasdagys@gmail.com)
+[![Gmail](https://shields.io)](mailto:nicolasdagys@gmail.com) nicolasdagys@gmail.com
 
 
 ---
