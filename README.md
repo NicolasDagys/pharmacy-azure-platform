@@ -725,7 +725,10 @@ Frontend URL
 
 Open the Frontend URL in a browser.
 
-You can log in with any of these credentials:
+### 6. Access the application
+
+You can log in with any of these credentials; each of these user has a different role.
+
 admin  /  Admin123
 pharma  /  Pharma123
 sales  /  Sales123
