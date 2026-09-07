@@ -724,6 +724,11 @@ API URL
 Frontend URL
 
 Open the Frontend URL in a browser.
+
+You can log in with any of these credentials:
+admin  /  Admin123
+pharma  /  Pharma123
+sales  /  Sales123
 ---
 
 # API Documentation
