@@ -720,18 +720,21 @@ The deployment script provisions the Azure infrastructure, builds the container 
 
 After deployment, the script prints:
 
-API URL
-Frontend URL
+API URL.
+Frontend URL.
 
 Open the Frontend URL in a browser.
 
-### 6. Access the application
+### 7. Login
 
 You can log in with any of these credentials; each of these user has a different role.
 
 admin  /  Admin123
+
 pharma  /  Pharma123
+
 sales  /  Sales123
+
 ---
 
 # API Documentation
