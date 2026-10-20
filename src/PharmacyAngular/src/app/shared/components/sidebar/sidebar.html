@@ -1,45 +1,61 @@
-<div class="list-group rounded-0">
+<nav class="side-nav">
 
-    <a routerLink="/dashboard" routerLinkActive="active" class="list-group-item list-group-item-action">
+    <a routerLink="/dashboard" routerLinkActive="active" class="side-link">
+
+        <span class="material-icons">dashboard</span>
 
         Dashboard
 
     </a>
 
-    <a routerLink="/products" routerLinkActive="active" class="list-group-item list-group-item-action   ">
+    <a routerLink="/products" routerLinkActive="active" class="side-link">
+
+        <span class="material-icons">inventory_2</span>
 
         Products
 
     </a>
 
-    <a routerLink="/categories" routerLinkActive="active" class="list-group-item list-group-item-action">
+    <a routerLink="/categories" routerLinkActive="active" class="side-link">
+
+        <span class="material-icons">category</span>
 
         Categories
 
     </a>
 
     <a *ngIf="canViewCustomers" routerLink="/customers" routerLinkActive="active"
-        class="list-group-item list-group-item-action">
+        class="side-link">
+
+        <span class="material-icons">groups</span>
 
         Customers
 
     </a>
 
     <a *ngIf="canViewEmployees" routerLink="/employees" routerLinkActive="active"
-        class="list-group-item list-group-item-action">
+        class="side-link">
+
+        <span class="material-icons">badge</span>
 
         Employees
 
     </a>
 
-    <a routerLink="/invoices" routerLinkActive="active" class="list-group-item list-group-item-action">
+    <a routerLink="/invoices" routerLinkActive="active" class="side-link">
+
+        <span class="material-icons">receipt_long</span>
 
         Invoices
 
     </a>
 
-    <a routerLink="inventory/chat" routerLinkActive="active" class="list-group-item list-group-item-action">
+    <a routerLink="inventory/chat" routerLinkActive="active" class="side-link">
+
+        <span class="material-icons">smart_toy</span>
 
         AI Assistant
+
     </a>
-</div>
+
+</nav>

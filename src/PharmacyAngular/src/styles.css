@@ -1,4 +1,204 @@
-/* You can add global styles to this file, and also import other style files */
+/* ==========================================================
+   Design tokens
+   ========================================================== */
+:root {
+  --brand: #0d9488;
+  --brand-hover: #0f766e;
+  --brand-soft: #ccfbf1;
+  --brand-softer: #f0fdfa;
+
+  --bg: #f3f4f6;
+  --surface: #ffffff;
+  --text: #111827;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+
+  --radius: 12px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 2px rgba(17, 24, 39, 0.06), 0 1px 3px rgba(17, 24, 39, 0.08);
+  --shadow-md: 0 4px 12px rgba(17, 24, 39, 0.08);
+
+  /* Bootstrap overrides */
+  --bs-primary: #0d9488;
+  --bs-primary-rgb: 13, 148, 136;
+  --bs-body-font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --bs-body-color: #111827;
+  --bs-body-bg: #f3f4f6;
+  --bs-border-color: #e5e7eb;
+  --bs-border-radius: 10px;
+  --bs-link-color: #0d9488;
+  --bs-link-hover-color: #0f766e;
+}
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { font-weight: 600; letter-spacing: -0.01em; }
+
+hr { border-color: var(--border); opacity: 1; }
+
+/* ==========================================================
+   Buttons
+   ========================================================== */
+.btn {
+  border-radius: 10px;
+  font-weight: 500;
+  transition: background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+.btn-primary {
+  --bs-btn-bg: #0d9488;
+  --bs-btn-border-color: #0d9488;
+  --bs-btn-hover-bg: #0f766e;
+  --bs-btn-hover-border-color: #0f766e;
+  --bs-btn-active-bg: #115e59;
+  --bs-btn-active-border-color: #115e59;
+  --bs-btn-disabled-bg: #0d9488;
+  --bs-btn-disabled-border-color: #0d9488;
+  --bs-btn-focus-shadow-rgb: 13, 148, 136;
+}
+.btn-success {
+  --bs-btn-bg: #16a34a;
+  --bs-btn-border-color: #16a34a;
+  --bs-btn-hover-bg: #15803d;
+  --bs-btn-hover-border-color: #15803d;
+  --bs-btn-active-bg: #166534;
+  --bs-btn-active-border-color: #166534;
+}
+.btn-secondary {
+  --bs-btn-color: #374151;
+  --bs-btn-bg: #ffffff;
+  --bs-btn-border-color: #d1d5db;
+  --bs-btn-hover-color: #111827;
+  --bs-btn-hover-bg: #f9fafb;
+  --bs-btn-hover-border-color: #9ca3af;
+  --bs-btn-active-color: #111827;
+  --bs-btn-active-bg: #f3f4f6;
+  --bs-btn-active-border-color: #9ca3af;
+}
+.btn-warning {
+  --bs-btn-color: #78350f;
+  --bs-btn-bg: #fef3c7;
+  --bs-btn-border-color: #fde68a;
+  --bs-btn-hover-color: #78350f;
+  --bs-btn-hover-bg: #fde68a;
+  --bs-btn-hover-border-color: #fcd34d;
+  --bs-btn-active-color: #78350f;
+  --bs-btn-active-bg: #fcd34d;
+  --bs-btn-active-border-color: #fbbf24;
+}
+.btn-danger {
+  --bs-btn-bg: #dc2626;
+  --bs-btn-border-color: #dc2626;
+  --bs-btn-hover-bg: #b91c1c;
+  --bs-btn-hover-border-color: #b91c1c;
+  --bs-btn-active-bg: #991b1b;
+  --bs-btn-active-border-color: #991b1b;
+}
+.btn-info {
+  --bs-btn-color: #075985;
+  --bs-btn-bg: #e0f2fe;
+  --bs-btn-border-color: #bae6fd;
+  --bs-btn-hover-color: #075985;
+  --bs-btn-hover-bg: #bae6fd;
+  --bs-btn-hover-border-color: #7dd3fc;
+}
+.btn-outline-primary {
+  --bs-btn-color: #0d9488;
+  --bs-btn-border-color: #0d9488;
+  --bs-btn-hover-bg: #0d9488;
+  --bs-btn-hover-border-color: #0d9488;
+  --bs-btn-active-bg: #0f766e;
+  --bs-btn-active-border-color: #0f766e;
+}
+
+/* ==========================================================
+   Forms
+   ========================================================== */
+.form-label { font-weight: 500; font-size: 0.875rem; color: #374151; }
+
+.form-control,
+.form-select {
+  border-color: #d1d5db;
+  border-radius: 10px;
+}
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 0.2rem rgba(13, 148, 136, 0.18);
+}
+
+/* ==========================================================
+   Cards, tables, alerts
+   ========================================================== */
+.card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+.card.shadow, .card.shadow-sm { box-shadow: var(--shadow-sm) !important; }
+
+.table {
+  --bs-table-bg: var(--surface);
+  --bs-table-hover-bg: #f0fdfa;
+  --bs-table-border-color: #e5e7eb;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  vertical-align: middle;
+}
+.table > thead > tr > th {
+  background: #f9fafb;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--border);
+}
+
+.alert { border: 0; border-radius: var(--radius); }
+.alert-info { background: #e0f2fe; color: #075985; }
+.alert-danger { background: #fee2e2; color: #991b1b; }
+.alert-warning { background: #fef3c7; color: #92400e; }
+.alert-success { background: #dcfce7; color: #166534; }
+
+/* ==========================================================
+   Status badges and stock indicators
+   ========================================================== */
+.badge-status {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: #f3f4f6;
+  color: #374151;
+}
+.badge-status[data-status='Preparation'] { background: #fef3c7; color: #92400e; }
+.badge-status[data-status='Dispatch']    { background: #e0f2fe; color: #075985; }
+.badge-status[data-status='Shipment']    { background: #ede9fe; color: #5b21b6; }
+.badge-status[data-status='Delivered']   { background: #dcfce7; color: #166534; }
+
+.stock-badge {
+  display: inline-block;
+  min-width: 2rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-weight: 600;
+  text-align: center;
+  background: #dcfce7;
+  color: #166534;
+}
+.stock-badge.stock-low { background: #fef3c7; color: #92400e; }
+.stock-badge.stock-out { background: #fee2e2; color: #991b1b; }
+
+/* Material Icons helper */
+.material-icons { font-size: 20px; vertical-align: middle; line-height: 1; }

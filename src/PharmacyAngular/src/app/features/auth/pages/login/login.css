@@ -1,5 +1,130 @@
-body{
+.login-page {
+    display: flex;
+    min-height: 100vh;
+    background: var(--surface);
+}
 
-    background-color:#f5f7fa;
+/* Brand panel */
+.login-brand {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+    color: #fff;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.14), transparent 45%),
+        linear-gradient(135deg, #0f766e 0%, #0d9488 55%, #14b8a6 100%);
+}
 
+.brand-content {
+    max-width: 380px;
+}
+
+.brand-icon {
+    font-size: 56px !important;
+    padding: 16px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.16);
+    margin-bottom: 24px;
+}
+
+.brand-content h1 {
+    font-size: 2.25rem;
+    margin: 0 0 12px;
+}
+
+.brand-content p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    opacity: 0.9;
+    margin: 0;
+}
+
+/* Form panel */
+.login-form-side {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 24px;
+    background: var(--bg);
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 40px 36px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+}
+
+.login-card h2 {
+    font-size: 1.6rem;
+    margin: 0 0 6px;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0 0 28px;
+}
+
+/* Inputs with leading icon */
+.input-icon {
+    position: relative;
+}
+
+.input-icon > .material-icons {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    pointer-events: none;
+}
+
+.input-icon .form-control {
+    padding: 0.6rem 0.75rem 0.6rem 42px;
+}
+
+.input-icon .form-control.has-toggle {
+    padding-right: 44px;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    display: flex;
+    padding: 6px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #6b7280;
+    cursor: pointer;
+}
+
+.toggle-password:hover {
+    background: #f3f4f6;
+    color: var(--text);
+}
+
+.sign-in {
+    padding: 0.7rem 1rem;
+    font-weight: 600;
+}
+
+/* Mobile: only the form */
+@media (max-width: 800px) {
+    .login-brand {
+        display: none;
+    }
+
+    .login-card {
+        padding: 32px 24px;
+    }
 }

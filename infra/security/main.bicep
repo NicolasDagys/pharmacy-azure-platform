@@ -3,12 +3,14 @@ param environment string
 param sqlAdminUser string
 @secure()
 param sqlAdminPassword string
+@secure()
 param jwtKey string
 param jwtIssuer string
 param jwtAudience string
 param sqlServerName string
 param databaseName string
-param secrets array
+@secure()
+param openAiApiKey string
 
 module managedIdentity './modules/managedIdentity.bicep' = {
   name: 'managedIdentity'
@@ -39,7 +41,7 @@ module keyVault './modules/keyVault.bicep' = {
 
     sqlConnectionString: 'Server=tcp:${sqlServerName}.database.windows.net,1433;Initial Catalog=${databaseName};Persist Security Info=False;User ID=${sqlAdminUser};Password=${sqlAdminPassword};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;'
 
-    secrets: secrets
+    openAiApiKey: openAiApiKey
   }
 }
 module keyVaultRoleAssignment './modules/keyVaultRoleAssignment.bicep' = {

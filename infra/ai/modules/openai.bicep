@@ -32,4 +32,5 @@ resource openAiDeployment 'Microsoft.CognitiveServices/accounts/deployments@2024
 }
 
 output openAiEndpoint string = openAi.properties.endpoint
+@secure()
 output openAiKey string = openAi.listKeys().key1

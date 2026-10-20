@@ -1,13 +1,32 @@
-.card{
-
-    border-radius:12px;
-
+.stat {
+    box-shadow: var(--shadow-sm);
 }
 
-h2{
+.stat-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
 
-    font-weight:bold;
+.stat-head h6 {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+}
 
-    margin-top:10px;
+.stat-icon {
+    padding: 8px;
+    border-radius: 10px;
+    background: var(--brand-soft);
+    color: var(--brand-hover);
+}
 
+h2 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    margin: 12px 0 0;
 }

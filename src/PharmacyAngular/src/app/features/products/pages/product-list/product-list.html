@@ -131,7 +131,11 @@
 
             <td>{{product.priceProd}}</td>
 
-            <td>{{product.stockQty}}</td>
+            <td>
+                <span class="stock-badge"
+                    [class.stock-low]="product.stockQty > 0 && product.stockQty < 10"
+                    [class.stock-out]="product.stockQty === 0">{{product.stockQty}}</span>
+            </td>
 
             <td>{{product.expDateProd}}</td>
 

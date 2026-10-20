@@ -111,6 +111,7 @@ Write-Host "Building API image in Azure..."
 
 az acr build `
     --registry "pharmacyacr$Environment" `
+    --resource-group $ResourceGroup `
     --image $ApiImage `
     --file "$Root\src\PharmacyApiEF\Dockerfile" `
     "$Root\src\PharmacyApiEF"
@@ -124,6 +125,7 @@ Write-Host "Building Frontend image in Azure..."
 
 az acr build `
     --registry "pharmacyacr$Environment" `
+    --resource-group $ResourceGroup `
     --image $FrontendImage `
     --file "$Root\src\PharmacyAngular\Dockerfile" `
     "$Root\src\PharmacyAngular"
@@ -152,6 +154,19 @@ powershell.exe `
 
 if ($LASTEXITCODE -ne 0) {
     throw "Database initialization failed."
+}
+
+# The temporary firewall rule for this machine is no longer needed.
+Write-Host ""
+Write-Host "Removing temporary SQL firewall rule..."
+
+az sql server firewall-rule delete `
+    --resource-group $ResourceGroup `
+    --server $SqlServerName `
+    --name AllowMyIP
+
+if ($LASTEXITCODE -ne 0) {
+    Write-Warning "Could not remove the AllowMyIP firewall rule. Remove it manually."
 }
 
 

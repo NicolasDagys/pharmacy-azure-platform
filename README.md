@@ -720,8 +720,10 @@ The deployment script provisions the Azure infrastructure, builds the container 
 
 After deployment, the script prints:
 
-API URL.
-Frontend URL.
+API URL
+
+Frontend URL
+
 
 Open the Frontend URL in a browser.
 

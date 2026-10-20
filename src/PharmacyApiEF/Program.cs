@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -78,15 +79,50 @@ builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddHealthChecks().AddDbContextCheck<PharmacyContext>();
 
 builder.Services.AddResponseCaching();
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders =
+        ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+    // Container Apps ingress is not in the default trusted proxy lists.
+    options.KnownNetworks.Clear();
+    options.KnownProxies.Clear();
+});
+
+static string ClientKey(HttpContext ctx) =>
+    ctx.User.Identity?.IsAuthenticated == true
+        ? $"user:{ctx.User.Identity.Name}"
+        : $"ip:{ctx.Connection.RemoteIpAddress}";
+
 builder.Services.AddRateLimiter(options =>
 {
-    options.AddFixedWindowLimiter("fixed", policy =>
-    {
-        policy.Window = TimeSpan.FromMinutes(1);
-        policy.PermitLimit = 100;
-        policy.QueueLimit = 0;
-        policy.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
-    });
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+
+    // General limit, per client instead of one global bucket.
+    options.AddPolicy("fixed", ctx =>
+        RateLimitPartition.GetFixedWindowLimiter(ClientKey(ctx), _ => new FixedWindowRateLimiterOptions
+        {
+            Window = TimeSpan.FromMinutes(1),
+            PermitLimit = 100,
+            QueueLimit = 0
+        }));
+
+    // Login brute-force protection.
+    options.AddPolicy("login", ctx =>
+        RateLimitPartition.GetFixedWindowLimiter(ClientKey(ctx), _ => new FixedWindowRateLimiterOptions
+        {
+            Window = TimeSpan.FromMinutes(1),
+            PermitLimit = 10,
+            QueueLimit = 0
+        }));
+
+    // Azure OpenAI calls cost money.
+    options.AddPolicy("ai", ctx =>
+        RateLimitPartition.GetFixedWindowLimiter(ClientKey(ctx), _ => new FixedWindowRateLimiterOptions
+        {
+            Window = TimeSpan.FromMinutes(1),
+            PermitLimit = 5,
+            QueueLimit = 0
+        }));
 });
 
 // ----------------------------------------------------
@@ -159,8 +195,15 @@ var app = builder.Build();
 // Middleware Pipeline
 // ----------------------------------------------------
 
-app.UseSwagger();
-app.UseSwaggerUI();
+app.UseForwardedHeaders();
+
+// Swagger only in Development, or when explicitly enabled with Swagger__Enabled=true.
+if (app.Environment.IsDevelopment() ||
+    builder.Configuration.GetValue<bool>("Swagger:Enabled"))
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseHttpsRedirection();
 
@@ -170,9 +213,10 @@ app.UseResponseCaching();
 
 app.UseMiddleware<ExceptionMiddleware>();
 
-app.UseRateLimiter();
-
 app.UseAuthentication();
+
+// After authentication so limits can be partitioned per user.
+app.UseRateLimiter();
 
 app.UseAuthorization();
 

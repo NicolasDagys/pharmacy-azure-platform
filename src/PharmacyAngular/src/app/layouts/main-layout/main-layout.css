@@ -10,11 +10,15 @@
 
     width:240px;
 
-    background:#f8f9fa;
+    flex-shrink:0;
 
-    border-right:1px solid #dee2e6;
+    overflow-y:auto;
 
-    padding:15px;
+    background:#ffffff;
+
+    border-right:1px solid #e5e7eb;
+
+    padding:16px 12px;
 
 }
 
@@ -24,8 +28,18 @@
 
     overflow:auto;
 
-    padding:30px;
+    padding:32px;
 
-    background:#ffffff;
+    background:#f3f4f6;
+
+}
+
+@media (max-width: 800px) {
+
+    .content{
+
+        padding:16px;
+
+    }
 
 }

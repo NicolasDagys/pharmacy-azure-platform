@@ -1,5 +1,51 @@
-.navbar{
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    padding: 0 24px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+}
 
-    height:60px;
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--brand);
+}
 
+.brand .material-icons {
+    font-size: 26px;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: var(--brand-softer);
+    color: var(--brand-hover);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.btn .material-icons {
+    font-size: 17px;
+    margin-right: 2px;
+}
+
+@media (max-width: 700px) {
+    .user-chip {
+        display: none;
+    }
 }

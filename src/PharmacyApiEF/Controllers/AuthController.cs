@@ -25,6 +25,7 @@ namespace PharmacyApiEF.Controllers
         //POST   /api/auth/login
         [HttpPost("login")]
         [AllowAnonymous]
+        [EnableRateLimiting("login")]
         public async Task<ActionResult> Login(LoginDto dto)
         {
             if (dto == null)

@@ -10,6 +10,9 @@ namespace PharmacyApiEF.Services.Auth
 {
     public class AuthService : IAuthService
     {
+        private static readonly string DummyHash =
+            BCrypt.Net.BCrypt.HashPassword("not-a-real-password", 11);
+
         private readonly PharmacyContext _context;
         private readonly IConfiguration _configuration;
 
@@ -23,7 +26,11 @@ namespace PharmacyApiEF.Services.Auth
             Employee? employee = await _context.Employees.FirstOrDefaultAsync(e => e.UserEmp == dto.UserEmp);
 
             if (employee == null)
+            {
+                // Same BCrypt cost as a real check, to avoid revealing which users exist by timing.
+                BCrypt.Net.BCrypt.Verify(dto.Password, DummyHash);
                 return null;
+            }
 
             bool valid =
                 BCrypt.Net.BCrypt.Verify(dto.Password,employee.PassHashEmp);

@@ -18,6 +18,14 @@ export class LoginComponent {
     private router = inject(Router);
     private fb = inject(FormBuilder);
 
+    showPassword = false;
+
+    togglePassword(): void {
+
+        this.showPassword = !this.showPassword;
+
+    }
+
     loginForm = this.fb.group({
 
         userEmp: ['', Validators.required],

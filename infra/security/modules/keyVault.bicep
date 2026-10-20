@@ -9,7 +9,8 @@ param jwtIssuer string
 param jwtAudience string
 @secure()
 param sqlConnectionString string
-param secrets array
+@secure()
+param openAiApiKey string
 
 resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
   name: keyVaultName
@@ -73,15 +74,13 @@ resource jwtAudienceSecret 'Microsoft.KeyVault/vaults/secrets@2023-07-01' = {
   }
 }
 
-resource secretResources 'Microsoft.KeyVault/vaults/secrets@2023-07-01' = [
-  for secret in secrets: {
-    parent: keyVault
-    name: secret.name
-    properties: {
-      value: secret.value
-    }
+resource openAiApiKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-07-01' = {
+  parent: keyVault
+  name: 'openai-api-key'
+  properties: {
+    value: openAiApiKey
   }
-]
+}
 
 output keyVaultId string = keyVault.id
 output keyVaultUri string = keyVault.properties.vaultUri

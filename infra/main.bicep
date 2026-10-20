@@ -91,12 +91,7 @@ module security './security/main.bicep' = {
     sqlServerName: data.outputs.sqlServerName
     databaseName: data.outputs.databaseName
 
-    secrets: [
-      {
-        name: 'openai-api-key'
-        value: openAi.outputs.openAiKey
-      }
-    ]
+    openAiApiKey: openAi.outputs.openAiKey
   }
 }
 
